@@ -10,9 +10,20 @@ public class GameController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Restart()
     {
-        
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        else if (Input.GetKey(KeyCode.R))
+        {
+            Restart();
+        }
     }
 }
