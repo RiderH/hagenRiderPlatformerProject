@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public GameObject WinText;
     public void Restart()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
@@ -25,5 +20,11 @@ public class GameController : MonoBehaviour
         {
             Restart();
         }
+    }
+
+    public void Win()
+    {
+        WinText.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
