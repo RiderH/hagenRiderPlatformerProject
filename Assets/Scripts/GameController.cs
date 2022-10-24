@@ -10,6 +10,11 @@ public class GameController : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
