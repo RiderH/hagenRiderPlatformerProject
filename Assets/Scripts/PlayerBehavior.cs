@@ -14,6 +14,7 @@ public class PlayerBehavior : MonoBehaviour
     public GameController Controller;
     bool grounded = true;
     public List<GameObject> CurrentlyTouchingPlayer;
+    bool HasDied;
 
 
     private void Start()
@@ -58,11 +59,16 @@ public class PlayerBehavior : MonoBehaviour
 
         if (col.gameObject.tag == "DeathTrigger")
         {
-            Instantiate(Corpse, Player.transform.position, Quaternion.Euler(0, 0, 90));
+            if (HasDied == false)
+            {
+                Instantiate(Corpse, Player.transform.position, Quaternion.Euler(0, 0, 90));
+                HasDied = true;
+            }
 
             transform.position = RespawnPos.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
+
 
         if (col.gameObject.name == "Coffin")
         {
@@ -87,6 +93,9 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         CheckIfPlayerIsGrounded();
+
+        HasDied = false;
+    
     }
 
     private void CheckIfPlayerIsGrounded()
