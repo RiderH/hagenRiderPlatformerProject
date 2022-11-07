@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd5e3f4c2da0274591923f8a6a5f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ConnectedPlatform: {fileID: 0}
+  AdjustedPosition: {fileID: 0}
+  CurrentlyTouchingButton: []
+  StartPostition: {x: 0, y: 0}
 --- !u!61 &8951536875108420552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -107,7 +111,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1061223203471344262}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 90fc6f785f5d84047b8ddb022541a99f, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

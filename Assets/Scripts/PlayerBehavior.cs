@@ -67,6 +67,8 @@ public class PlayerBehavior : MonoBehaviour
 
             transform.position = RespawnPos.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+            CurrentlyTouchingPlayer.Clear();
         }
 
 
