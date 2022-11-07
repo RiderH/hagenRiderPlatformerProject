@@ -50,14 +50,14 @@ public class PlayerBehavior : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveVelocity, GetComponent<Rigidbody2D>().velocity.y);
 
     }
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (col.transform.GetComponent<SurfaceEffector2D>())
+        if (collision.transform.GetComponent<SurfaceEffector2D>())
         {
-            Conveyor = col.transform.GetComponent<SurfaceEffector2D>();
+            Conveyor = collision.transform.GetComponent<SurfaceEffector2D>();
         }
 
-        if (col.gameObject.tag == "DeathTrigger")
+        if (collision.gameObject.tag == "DeathTrigger")
         {
             if (HasDied == false)
             {
@@ -71,17 +71,19 @@ public class PlayerBehavior : MonoBehaviour
             CurrentlyTouchingPlayer.Clear();
         }
 
-
-        if (col.gameObject.name == "Coffin")
+        CurrentlyTouchingPlayer.Clear();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Coffin")
         {
             Controller.Win();
         }
 
-        CurrentlyTouchingPlayer.Add(col.gameObject);
+        CurrentlyTouchingPlayer.Add(collision.gameObject);
 
         CheckIfPlayerIsGrounded();
     }
-
     void OnCollisionExit2D(Collision2D col)
     {
         if (col.transform.GetComponent<SurfaceEffector2D>())
@@ -89,17 +91,17 @@ public class PlayerBehavior : MonoBehaviour
             Conveyor = null;
         }
 
-        if (CurrentlyTouchingPlayer.Contains(col.gameObject))
+        HasDied = false;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (CurrentlyTouchingPlayer.Contains(collision.gameObject))
         {
-            CurrentlyTouchingPlayer.Remove(col.gameObject);
+            CurrentlyTouchingPlayer.Remove(collision.gameObject);
         }
 
         CheckIfPlayerIsGrounded();
-
-        HasDied = false;
-    
     }
-
     private void CheckIfPlayerIsGrounded()
     {
         if (CurrentlyTouchingPlayer.Count > 0)
