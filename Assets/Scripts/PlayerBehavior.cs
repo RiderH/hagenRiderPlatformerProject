@@ -15,19 +15,27 @@ public class PlayerBehavior : MonoBehaviour
     bool grounded = true;
     public List<GameObject> CurrentlyTouchingPlayer;
     bool HasDied;
+    Animator m_Animator;
+    public AudioClip Death;
+    public AudioClip JumpSound;
+
 
 
     private void Start()
     {
         CurrentlyTouchingPlayer = new List<GameObject>();
+
+        m_Animator = gameObject.GetComponent<Animator>();
     }
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W))
         {
             if (grounded)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, Jump);
+                AudioSource.PlayClipAtPoint(JumpSound, Camera.main.transform.position);
             }
         }
 
@@ -41,14 +49,23 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             moveVelocity += -Speed;
+            m_Animator.SetBool("RunningLeft", true);
+        }
+        else
+        {
+            m_Animator.SetBool("RunningLeft", false);
         }
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             moveVelocity += Speed;
+            m_Animator.SetBool("RunningRight", true);
+        }
+        else
+        {
+            m_Animator.SetBool("RunningRight", false);
         }
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveVelocity, GetComponent<Rigidbody2D>().velocity.y);
-
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -59,9 +76,11 @@ public class PlayerBehavior : MonoBehaviour
 
         if (collision.gameObject.tag == "DeathTrigger")
         {
+            AudioSource.PlayClipAtPoint(Death, Camera.main.transform.position);
+
             if (HasDied == false)
             {
-                Instantiate(Corpse, Player.transform.position, Quaternion.Euler(0, 0, 90));
+                Instantiate(Corpse, Player.transform.position, Quaternion.Euler(0, 0, 0));
                 HasDied = true;
             }
 
@@ -71,7 +90,6 @@ public class PlayerBehavior : MonoBehaviour
             CurrentlyTouchingPlayer.Clear();
         }
 
-        CurrentlyTouchingPlayer.Clear();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

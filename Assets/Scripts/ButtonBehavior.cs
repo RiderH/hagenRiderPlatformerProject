@@ -8,18 +8,15 @@ public class ButtonBehavior : MonoBehaviour
     public GameObject AdjustedPosition;
     public List<GameObject> CurrentlyTouchingButton;
     public Vector2 StartPostition;
-    // Start is called before the first frame update
+
+    public SpriteRenderer ButtonSpriteRenderer;
+    public Sprite PushedButtonSprite;
+    public Sprite ButtonSprite;
     void Start()
     {
         CurrentlyTouchingButton = new List<GameObject>();
 
         StartPostition = ConnectedPlatform.transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,10 +41,12 @@ public class ButtonBehavior : MonoBehaviour
         if(CurrentlyTouchingButton.Count > 0)
         {
             ConnectedPlatform.transform.position = AdjustedPosition.transform.position;
+            ButtonSpriteRenderer.sprite = PushedButtonSprite;
         }
         else
         {
             ConnectedPlatform.transform.position = StartPostition;
+            ButtonSpriteRenderer.sprite = ButtonSprite;
         }
     }
 
