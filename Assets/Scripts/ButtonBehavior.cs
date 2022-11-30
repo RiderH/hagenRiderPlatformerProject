@@ -8,10 +8,11 @@ public class ButtonBehavior : MonoBehaviour
     public GameObject AdjustedPosition;
     public List<GameObject> CurrentlyTouchingButton;
     public Vector2 StartPostition;
-
     public SpriteRenderer ButtonSpriteRenderer;
     public Sprite PushedButtonSprite;
     public Sprite ButtonSprite;
+    public AudioClip DoorSound;
+
     void Start()
     {
         CurrentlyTouchingButton = new List<GameObject>();
@@ -24,6 +25,8 @@ public class ButtonBehavior : MonoBehaviour
         CurrentlyTouchingButton.Add(collision.gameObject);
 
         CheckIfButtonIsActive();
+
+        AudioSource.PlayClipAtPoint(DoorSound, Camera.main.transform.position);
     }
 
     private void OnCollisionExit2D(Collision2D collision)

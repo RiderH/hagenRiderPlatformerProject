@@ -109,7 +109,7 @@ MonoBehaviour:
   Conveyor: {fileID: 0}
   Controller: {fileID: 0}
   CurrentlyTouchingPlayer: []
-  Death: {fileID: 8300000, guid: fa844ed4937dbd843adef018179b9435, type: 3}
+  DeathSound: {fileID: 8300000, guid: fa844ed4937dbd843adef018179b9435, type: 3}
   JumpSound: {fileID: 8300000, guid: e33adda7a86ede74d878d8565dfb3bfb, type: 3}
 --- !u!50 &8828306874370886145
 Rigidbody2D:

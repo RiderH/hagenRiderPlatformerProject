@@ -106,6 +106,7 @@ MonoBehaviour:
   ButtonSpriteRenderer: {fileID: 7639291330642285257}
   PushedButtonSprite: {fileID: -1544507063, guid: 612feefe63a994a43bfdb667d570b62a, type: 3}
   ButtonSprite: {fileID: -1451613137, guid: 612feefe63a994a43bfdb667d570b62a, type: 3}
+  DoorSound: {fileID: 8300000, guid: 34ba1948e06273e4e8e929bd41dd9246, type: 3}
 --- !u!61 &8951536875108420552
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -16,9 +16,9 @@ public class PlayerBehavior : MonoBehaviour
     public List<GameObject> CurrentlyTouchingPlayer;
     bool HasDied;
     Animator m_Animator;
-    public AudioClip Death;
+    public AudioClip DeathSound;
     public AudioClip JumpSound;
-
+    public delegate void MyDelegate();
 
 
     private void Start()
@@ -76,19 +76,24 @@ public class PlayerBehavior : MonoBehaviour
 
         if (collision.gameObject.tag == "DeathTrigger")
         {
-            AudioSource.PlayClipAtPoint(Death, Camera.main.transform.position);
-
-            if (HasDied == false)
-            {
-                Instantiate(Corpse, Player.transform.position, Quaternion.Euler(0, 0, 0));
-                HasDied = true;
-            }
-
-            transform.position = RespawnPos.transform.position;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-
-            CurrentlyTouchingPlayer.Clear();
+            Dying();
         }
+
+    }
+    private void Dying()
+    {
+        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position);
+
+        if (HasDied == false)
+        {
+            Instantiate(Corpse, Player.transform.position, Quaternion.Euler(0, 0, 0));
+            HasDied = true;
+        }
+
+        transform.position = RespawnPos.transform.position;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+        CurrentlyTouchingPlayer.Clear();
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
