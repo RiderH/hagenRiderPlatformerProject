@@ -78,7 +78,6 @@ public class PlayerBehavior : MonoBehaviour
         {
             Dying();
         }
-
     }
     private void Dying()
     {
